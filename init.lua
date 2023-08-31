@@ -21,3 +21,10 @@ if astronvim.default_colorscheme then
 end
 
 require("astronvim.utils").conditional_func(astronvim.user_opts("polish", nil, false), true)
+
+-- Disable relative numbers
+vim.opt.number = true
+vim.opt.relativenumber = false
+
+-- Disable active mouse
+vim.opt.mouse = ''

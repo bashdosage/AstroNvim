@@ -253,7 +253,7 @@ M.on_attach = function(client, bufnr)
         end,
       },
       {
-        events = { "CursorMoved", "CursorMovedI", "BufLeave" },
+        events = { "CursorMoved", "CursorMovedI" },
         desc = "clear references when cursor moves",
         callback = function() vim.lsp.buf.clear_references() end,
       },
@@ -408,7 +408,27 @@ function M.config(server_name)
   end
   if server_name == "yamlls" then -- by default add yaml schemas
     local schemastore_avail, schemastore = pcall(require, "schemastore")
-    if schemastore_avail then lsp_opts.settings = { yaml = { schemas = schemastore.yaml.schemas() } } end
+    if schemastore_avail then
+      lsp_opts.settings = {
+        yaml = {
+          schemas = schemastore.yaml.schemas(),
+          customTags = {
+            "!Ref",
+            "!ImportValue",
+            "!Equals sequence",
+            "!FindInMap sequence",
+            "!GetAtt",
+            "!GetAZs",
+            "!Sub",
+            "!Not sequence",
+            "!Join sequence",
+            "!Select sequence",
+            "!Split sequence",
+            "!If sequence",
+          },
+        },
+      }
+    end
   end
   if server_name == "lua_ls" then -- by default initialize neodev and disable third party checking
     pcall(require, "neodev")
