@@ -425,6 +425,7 @@ function M.config(server_name)
             "!Select sequence",
             "!Split sequence",
             "!If sequence",
+            "!Include",
           },
         },
       }
